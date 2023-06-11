@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  app:
+    build:
+      args:
+        user: user
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: todo
+    container_name: todolist_v2
+    restart: unless-stopped
+    working_dir: /var/www/html
+    environment:
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG:
+        client_host=host.docker.internal
+        start_with_request=yes
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  db-data:
+    container_name: db-data
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./storage/db-data:/var/lib/postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
