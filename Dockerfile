@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl 
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl
 RUN docker-php-ext-install pdo pdo_pgsql pgsql zip exif pcntl
 RUN pecl install xdebug-3.2.0 && docker-php-ext-enable xdebug
 RUN docker-php-ext-install gd
@@ -42,6 +42,6 @@ WORKDIR /var/www/html
 
 USER $user
 
-# Expose port 9000 and start php-fpm server
-#EXPOSE 9000
-#CMD ["php-fpm"]
+CMD php artisan serve --host=0.0.0.0 --port=9000
+EXPOSE 9000
+
