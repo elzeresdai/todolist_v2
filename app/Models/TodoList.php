@@ -16,6 +16,11 @@ class TodoList extends Model
 
     public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Task::class,'todo_id','id');
+        return $this->hasMany(Task::class, 'todo_id', 'id');
+    }
+
+    public function allTasksCompleted(): bool
+    {
+        return $this->tasks()->where('completed', false)->doesntExist();
     }
 }

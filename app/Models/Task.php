@@ -10,15 +10,14 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'todo_id', 'task', 'completed', 'disabled'
+        'todo_id', 'task', 'completed', 'disabled', 'deadline'
     ];
 
-    protected $casts = [
-        'deadline'=>'datetime'
-    ];
+    protected $dateFormat = ['deadline'];
 
     public function todoList(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(TodoList::class,'id','todo_id');
     }
+
 }
