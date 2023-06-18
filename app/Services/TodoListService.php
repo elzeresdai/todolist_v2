@@ -55,8 +55,14 @@ class TodoListService
         return $this->repository->update($todoList, $data);
     }
 
-    public function delete(TodoList $todoList): bool
+    public function delete(int $id): bool
     {
+        $todoList = $this->repository->getById($id);
+
+        if (!$todoList) {
+            throw new TodoListNotFoundException('TodoList not found');
+        }
+
         return $this->repository->delete($todoList);
     }
 
