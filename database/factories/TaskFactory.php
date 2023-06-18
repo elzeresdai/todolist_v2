@@ -21,7 +21,7 @@ class TaskFactory extends Factory
     {
         return [
             'todo_id' => function () {
-                return TodoList::factory()->create()->id;
+                return TodoList::inRandomOrder()->first()->id;
             },
             'task' => $this->faker->sentence,
             'completed' => $this->faker->boolean,

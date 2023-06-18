@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Http\Interfaces\TodoListRepositoryInterface;
+use App\Interfaces\TodoListRepositoryInterface;
 use App\Models\TodoList;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -14,7 +14,7 @@ class TodoListRepository implements TodoListRepositoryInterface
         return TodoList::find($id);
     }
 
-    public function create(array $data): TodoList
+    public function store(array $data): TodoList
     {
         return TodoList::create($data);
     }
@@ -35,4 +35,6 @@ class TodoListRepository implements TodoListRepositoryInterface
         return TodoList::with('tasks')
             ->paginate(10);
     }
+
+
 }

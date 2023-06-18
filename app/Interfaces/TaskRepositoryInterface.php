@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Interfaces;
+namespace App\Interfaces;
 
 use App\Models\Task;
+use Illuminate\Database\Eloquent\Collection;
 
 interface TaskRepositoryInterface
 {
     public function getById(int $id): ?Task;
+
+    public function getByTodoListId(int $todoId): Collection;
 
     public function create(array $data): Task;
 

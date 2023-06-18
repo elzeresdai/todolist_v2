@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+use Illuminate\Http\Response;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -26,5 +28,34 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e): Response
+    {
+        if ($e instanceof TodoListServiceException) {
+            $statusCode = 400;
+            $errorMessage = $e->getMessage();
+            return response()->json(['error' => $errorMessage], $statusCode);
+        }
+
+        if ($e instanceof TodoListNotFoundException) {
+            $statusCode = 404;
+            $errorMessage = 'TodoList not found';
+            return response()->json(['error' => $errorMessage], $statusCode);
+        }
+
+        if ($e instanceof TodoListNotEditableException) {
+            $statusCode = 400;
+            $errorMessage = 'TodoList is not editable';
+            return response()->json(['error' => $errorMessage], $statusCode);
+        }
+
+        if ($e instanceof TodoListNotDeletableException) {
+            $statusCode = 400;
+            $errorMessage = 'TodoList is not deletable';
+            return response()->json(['error' => $errorMessage], $statusCode);
+        }
+
+        return parent::render($request, $e);
     }
 }

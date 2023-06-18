@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Http\Interfaces\TaskRepositoryInterface;
+use App\Interfaces\TaskRepositoryInterface;
 use App\Models\Task;
+use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository implements TaskRepositoryInterface
 {
@@ -11,6 +12,11 @@ class TaskRepository implements TaskRepositoryInterface
     public function getById(int $id): ?Task
     {
         return Task::find($id);
+    }
+
+    public function getByTodoListId(int $todoId): Collection
+    {
+        return Task::where('todo_id', $todoId)->get();
     }
 
     public function create(array $data): Task
@@ -28,4 +34,6 @@ class TaskRepository implements TaskRepositoryInterface
     {
         return $task->delete();
     }
+
+
 }
