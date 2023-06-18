@@ -36,5 +36,14 @@ class TodoListRepository implements TodoListRepositoryInterface
             ->paginate(10);
     }
 
+    public function makeCompleted(TodoList $todoList): bool
+    {
+        if($todoList->allTasksCompleted()){
+            $todoList->update(['completed'=>true]);
+        }
+
+        return $todoList->completed;
+    }
+
 
 }

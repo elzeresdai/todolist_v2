@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\TodoListNotEditableException;
-use App\Exceptions\TodoListNotFoundException;
-use App\Exceptions\TodoListServiceException;
+use App\Exceptions\TodoListExceptions\TodoListNotEditableException;
+use App\Exceptions\TodoListExceptions\TodoListNotFoundException;
+use App\Exceptions\TodoListExceptions\TodoListServiceException;
 use App\Services\TodoListService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TodoListController extends Controller

@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Models\TodoList;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface TodoListRepositoryInterface
 {
@@ -14,5 +15,7 @@ interface TodoListRepositoryInterface
 
     public function delete(TodoList $todoList): bool;
 
-    public function getAllWithTasks();
+    public function getAllWithTasks(): LengthAwarePaginator;
+
+    public function makeCompleted(TodoList $todoList): bool;
 }

@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Exceptions\TodoListNotEditableException;
-use App\Exceptions\TodoListNotFoundException;
-use App\Exceptions\TodoListServiceException;
+use App\Exceptions\TodoListExceptions\TodoListNotEditableException;
+use App\Exceptions\TodoListExceptions\TodoListNotFoundException;
+use App\Exceptions\TodoListExceptions\TodoListServiceException;
 use App\Models\TodoList;
 use App\Repositories\TodoListRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

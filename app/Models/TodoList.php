@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\Exceptions\TodoListNotDeletableException;
-use App\Exceptions\TodoListNotEditableException;
+use App\Exceptions\TodoListExceptions\TodoListNotDeletableException;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
