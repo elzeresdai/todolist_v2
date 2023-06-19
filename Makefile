@@ -17,3 +17,8 @@ tail-logs:
 
 jumpin:
 	docker-compose exec ${container} bash
+
+migrate:
+	docker-compose exec ${container} bash
+	php artisan migrate
+	php artisan db:seed
