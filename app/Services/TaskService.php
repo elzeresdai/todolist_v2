@@ -20,6 +20,11 @@ class TaskService
         return $this->taskRepository->create(array_merge($data, ['todo_id' => $todoList->id]));
     }
 
+    public function deleteTask(Task $task): bool
+    {
+        return $this->taskRepository->delete($task);
+    }
+
     public function updateTask(Task $task, array $data): Task
     {
         return $this->taskRepository->update($task, $data);
