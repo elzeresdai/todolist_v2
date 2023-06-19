@@ -17,16 +17,12 @@ class TaskService
 
     public function createTask(TodoList $todoList, array $data): Task
     {
-        $task = $this->taskRepository->create(array_merge($data, ['todo_id' => $todoList->id]));
-
-        return $task;
+        return $this->taskRepository->create(array_merge($data, ['todo_id' => $todoList->id]));
     }
 
     public function updateTask(Task $task, array $data): Task
     {
-        $task = $this->taskRepository->update($task, $data);
-
-        return $task;
+        return $this->taskRepository->update($task, $data);
     }
 
     public function markTaskAsCompleted(Task $task): Task
@@ -35,9 +31,7 @@ class TaskService
             throw new \RuntimeException('Task is already marked as completed.');
         }
 
-        $task = $this->taskRepository->markTaskAsCompleted($task);
-
-        return $task;
+        return $this->taskRepository->markTaskAsCompleted($task);
     }
 
     public function markTaskAsUncompleted(Task $task): Task
@@ -46,9 +40,7 @@ class TaskService
             throw new \RuntimeException('Task is not marked as completed.');
         }
 
-        $task = $this->taskRepository->markTaskAsUncompleted($task);
-
-        return $task;
+        return $this->taskRepository->markTaskAsUncompleted($task);
     }
 
 }
