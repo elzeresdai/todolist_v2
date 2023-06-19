@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\TodoListExceptions\TodoListNotEditableException;
 use App\Exceptions\TodoListExceptions\TodoListNotFoundException;
 use App\Exceptions\TodoListExceptions\TodoListServiceException;
+use App\Interfaces\TodoListRepositoryInterface;
 use App\Models\TodoList;
 use App\Repositories\TodoListRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -12,9 +13,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TodoListService
 {
-    protected TodoListRepository $repository;
+    protected TodoListRepositoryInterface $repository;
 
-    public function __construct(TodoListRepository $repository)
+    public function __construct(TodoListRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
