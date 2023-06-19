@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TodoListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/todolist', [TodoListController::class, 'index']);
+Route::post('/todolist', [TodoListController::class, 'store']);
+Route::get('/todolist/{id}', [TodoListController::class, 'show']);
+Route::put('/todolist/{id}', [TodoListController::class, 'update']);
+Route::delete('/todolist/{id}', [TodoListController::class, 'destroy']);
+Route::patch('/todolist/{id}/enable-editing', [TodoListController::class, 'enableEditing']);
+Route::patch('/todolist/{id}/disable-editing', [TodoListController::class, 'disableEditing']);

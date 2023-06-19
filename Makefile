@@ -6,6 +6,7 @@ up:
 build:
 	docker-compose rm -vsf
 	docker-compose down -v --remove-orphans
+	docker system prune -a
 	docker-compose build
 	docker-compose up -d
 
