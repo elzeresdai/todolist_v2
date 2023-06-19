@@ -2,66 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
-use Illuminate\Http\Request;
+use App\Services\TaskService;
+use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $taskService;
+
+    public function __construct(TaskService $taskService)
     {
-        //
+        $this->taskService = $taskService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(CreateTaskRequest $request): JsonResponse
     {
-        //
+        try {
+            $task = $this->taskService->createTask($request->validated());
+
+            return response()->json($task, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
     {
-        //
+        try {
+            $task = $this->taskService->updateTask($task, $request->validated());
+
+            return response()->json($task, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function markCompleted(Task $task): JsonResponse
     {
-        //
+        try {
+            $task = $this->taskService->markTaskAsCompleted($task);
+
+            return response()->json($task, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function markUncompleted(Task $task): JsonResponse
     {
-        //
+        try {
+            $task = $this->taskService->markTaskAsUncompleted($task);
+
+            return response()->json($task, 200);
+        } catch (\RuntimeException $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function delete(Task $task): JsonResponse
     {
-        //
+        try {
+            $this->taskService->deleteTask($task);
+
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-
 }

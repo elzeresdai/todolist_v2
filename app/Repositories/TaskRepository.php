@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository implements TaskRepositoryInterface
 {
-
     public function getById(int $id): ?Task
     {
         return Task::find($id);
@@ -35,5 +34,23 @@ class TaskRepository implements TaskRepositoryInterface
         return $task->delete();
     }
 
+    public function markTaskAsCompleted(Task $task): Task
+    {
+        $task->update([
+            'completed' => true,
+            'previously_completed' => true,
+        ]);
 
+        return $task;
+    }
+
+    public function markTaskAsUncompleted(Task $task): Task
+    {
+        $task->update([
+            'completed' => false,
+            'previously_completed' => $task->completed,
+        ]);
+
+        return $task;
+    }
 }
