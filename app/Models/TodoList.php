@@ -17,8 +17,8 @@ class TodoList extends Model
     protected $table = 'to_do_lists';
     protected $fillable = [
         'name',
-        'edit_options',
-        'delete_options',
+        'edit_option',
+        'delete_option',
     ];
 
     /**
@@ -36,13 +36,13 @@ class TodoList extends Model
 
     public function isEditable(): bool
     {
-        return $this->edit_options === self::EDIT_OPTION_ENABLED;
+        return $this->edit_option === self::EDIT_OPTION_ENABLED;
 
     }
 
     public function isDeletable(): bool
     {
-        return $this->delete_options === self::DELETE_OPTION_ENABLED;
+        return $this->delete_option === self::DELETE_OPTION_ENABLED;
     }
 
     public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany

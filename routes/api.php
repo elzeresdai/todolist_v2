@@ -20,5 +20,5 @@ Route::post('/todolist', [TodoListController::class, 'store']);
 Route::get('/todolist/{id}', [TodoListController::class, 'show']);
 Route::put('/todolist/{id}', [TodoListController::class, 'update']);
 Route::delete('/todolist/{id}', [TodoListController::class, 'destroy']);
-Route::post('/todolist/{id}/enable-editing', [TodoListController::class, 'enableEditing']);
-Route::post('/todolist/{id}/disable-editing', [TodoListController::class, 'disableEditing']);
+Route::patch('/todolist/{id}/enable-editing', [TodoListController::class, 'enableEditing']);
+Route::patch('/todolist/{id}/disable-editing', [TodoListController::class, 'disableEditing']);
