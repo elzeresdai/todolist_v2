@@ -19,6 +19,9 @@ class TodoListController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index(): JsonResponse
     {
         try {
@@ -29,6 +32,10 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function store(Request $request): JsonResponse
     {
         try {
@@ -39,6 +46,10 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function show(int $id): JsonResponse
     {
         try {
@@ -51,6 +62,11 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
     public function update(Request $request, int $id): JsonResponse
     {
         try {
@@ -65,6 +81,10 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function destroy(int $id): JsonResponse
     {
         try {
@@ -79,6 +99,12 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws TodoListNotFoundException
+     */
     public function enableEditing(Request $request, int $id): JsonResponse
     {
         try {
@@ -89,6 +115,12 @@ class TodoListController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws TodoListNotFoundException
+     */
     public function disableEditing(Request $request, int $id): JsonResponse
     {
         try {

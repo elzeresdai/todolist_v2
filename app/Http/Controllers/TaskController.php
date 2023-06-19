@@ -17,6 +17,10 @@ class TaskController extends Controller
         $this->taskService = $taskService;
     }
 
+    /**
+     * @param CreateTaskRequest $request
+     * @return JsonResponse
+     */
     public function create(CreateTaskRequest $request): JsonResponse
     {
         try {
@@ -28,6 +32,11 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * @param UpdateTaskRequest $request
+     * @param Task $task
+     * @return JsonResponse
+     */
     public function update(UpdateTaskRequest $request, Task $task): JsonResponse
     {
         try {
@@ -39,6 +48,10 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     */
     public function markCompleted(Task $task): JsonResponse
     {
         try {
@@ -50,6 +63,10 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     */
     public function markUncompleted(Task $task): JsonResponse
     {
         try {
@@ -63,6 +80,10 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     */
     public function delete(Task $task): JsonResponse
     {
         try {
